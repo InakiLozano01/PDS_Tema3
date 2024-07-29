@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import tkinter as tk
 from tkinter import messagebox, ttk
 import os
+import threading
 
 # Parámetros de grabación
 fs = 24000  # Frecuencia de muestreo de 24 KHz (múltiplo de 8 KHz)
@@ -177,51 +178,49 @@ def load_or_record_signals():
     i_signal = check_or_record_audio('i.wav')
     messagebox.showinfo("Carga/Grabación", "Señales cargadas o grabadas correctamente")
 
+def play_audio(signal, fs):
+    sd.play(signal, fs)
+    sd.wait()
+
 def play_original_a():
     global a_signal
     if a_signal is not None:
-        sd.play(a_signal, fs)
-        sd.wait()
+        threading.Thread(target=play_audio, args=(a_signal, fs)).start()
     else:
         messagebox.showerror("Error", "No hay señal original para 'a'")
 
 def play_original_e():
     global e_signal
     if e_signal is not None:
-        sd.play(e_signal, fs)
-        sd.wait()
+        threading.Thread(target=play_audio, args=(e_signal, fs)).start()
     else:
         messagebox.showerror("Error", "No hay señal original para 'e'")
 
 def play_original_i():
     global i_signal
     if i_signal is not None:
-        sd.play(i_signal, fs)
-        sd.wait()
+        threading.Thread(target=play_audio, args=(i_signal, fs)).start()
     else:
         messagebox.showerror("Error", "No hay señal original para 'i'")
 
 def play_processed_a():
     global processed_a
     if processed_a is not None:
-        sd.play(processed_a, 8000)
-        sd.wait()
+        threading.Thread(target=play_audio, args=(processed_a, 8000)).start()
     else:
         messagebox.showerror("Error", "No hay señal procesada para 'a'")
 
 def play_processed_e():
     global processed_e
     if processed_e is not None:
-        sd.play(processed_e, 8000)
-        sd.wait()
+        threading.Thread(target=play_audio, args=(processed_e, 8000)).start()
     else:
         messagebox.showerror("Error", "No hay señal procesada para 'e'")
 
 def play_processed_i():
     global processed_i
     if processed_i is not None:
-        sd.play(processed_i, 8000)
-        sd.wait()
+        threading.Thread(target=play_audio, args=(processed_i, 8000)).start()
     else:
         messagebox.showerror("Error", "No hay señal procesada para 'i'")
 
