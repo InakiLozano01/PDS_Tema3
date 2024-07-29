@@ -177,6 +177,30 @@ def load_or_record_signals():
     i_signal = check_or_record_audio('i.wav')
     messagebox.showinfo("Carga/Grabación", "Señales cargadas o grabadas correctamente")
 
+def play_original_a():
+    global a_signal
+    if a_signal is not None:
+        sd.play(a_signal, fs)
+        sd.wait()
+    else:
+        messagebox.showerror("Error", "No hay señal original para 'a'")
+
+def play_original_e():
+    global e_signal
+    if e_signal is not None:
+        sd.play(e_signal, fs)
+        sd.wait()
+    else:
+        messagebox.showerror("Error", "No hay señal original para 'e'")
+
+def play_original_i():
+    global i_signal
+    if i_signal is not None:
+        sd.play(i_signal, fs)
+        sd.wait()
+    else:
+        messagebox.showerror("Error", "No hay señal original para 'i'")
+
 def play_processed_a():
     global processed_a
     if processed_a is not None:
@@ -215,9 +239,9 @@ class AudioPlayerGUI:
         self.process_button = ttk.Button(self.master, text="Process Signals", command=process_signals)
         self.process_button.pack(pady=5)
         
-        self.create_audio_controls("Original A", 'a_signal')
-        self.create_audio_controls("Original E", 'e_signal')
-        self.create_audio_controls("Original I", 'i_signal')
+        self.create_audio_controls("Original A", play_original_a)
+        self.create_audio_controls("Original E", play_original_e)
+        self.create_audio_controls("Original I", play_original_i)
         self.create_audio_controls("Processed A", play_processed_a)
         self.create_audio_controls("Processed E", play_processed_e)
         self.create_audio_controls("Processed I", play_processed_i)
