@@ -124,7 +124,7 @@ def process_signals():
 
     # 5. Implement multiplexing
     # Define carrier frequencies for each channel
-    fc1, fc2, fc3 = 60000, 64000, 68000  # Carrier frequencies
+    fc1, fc2, fc3 = 62000, 66000, 70000  # Carrier frequencies
 
     # Upsample the signals to the multiplexed sampling rate
     fs_multiplexed = 192000  # Example: 24 times the base rate of 8000 Hz
